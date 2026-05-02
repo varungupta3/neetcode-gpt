@@ -12,7 +12,8 @@ class Solution:
         # np.assert(y_true.shape == y_pred.shape)
         eps = 1e-7
         y_pred = np.minimum(1, np.maximum(eps, y_pred))
-        return np.round(-np.sum((y_true==1) * np.log(y_pred) + (y_true == 0) * np.log(1.0 - y_pred)) / len(y_true), 4)
+        loss = -np.sum((y_true==1) * np.log(y_pred) + (y_true == 0) * np.log(1.0 - y_pred)) / len(y_true)
+        return np.round(loss, 4)
 
     def categorical_cross_entropy(self, y_true: NDArray[np.float64], y_pred: NDArray[np.float64]) -> float:
         # y_true: one-hot encoded true labels (shape: n_samples x n_classes)
@@ -22,4 +23,5 @@ class Solution:
         # np.assert(y_true.shape == y_pred.shape)
         eps = 1e-7
         y_pred = np.minimum(1, np.maximum(eps, y_pred))
-        return np.round(-np.sum(np.sum((y_true==1) * np.log(y_pred))) / y_true.shape[0], 4)
+        loss = -np.sum(np.sum((y_true==1) * np.log(y_pred))) / y_true.shape[0]
+        return np.round(loss, 4)
