@@ -22,9 +22,4 @@ class Solution:
         # np.assert(y_true.shape == y_pred.shape)
         eps = 1e-7
         y_pred = np.minimum(1, np.maximum(eps, y_pred))
-        print("y_true: ", y_true)
-        print("y_pred: ", y_pred)
-        print((y_true==1) * np.log(y_pred))
-        print((y_true == 0) * np.log(1.0 - y_pred))
-        print(y_true.shape[0])
         return np.round(-np.sum(np.sum((y_true==1) * np.log(y_pred))) / y_true.shape[0], 4)
