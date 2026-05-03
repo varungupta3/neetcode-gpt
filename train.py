@@ -12,6 +12,7 @@ class Solution:
         # sample batches from data, run forward/backward, update weights.
         # Return the final loss rounded to 4 decimals.
         optimizer = torch.optim.AdamW(model.parameters(), lr=lr)
+        loss = torch.Tensor([torch.inf])
         for epoch in range(epochs):
             torch.manual_seed(epoch)
             start_indices = torch.randint(len(data)-context_length, size=(batch_size,))
