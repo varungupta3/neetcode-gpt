@@ -52,8 +52,7 @@ class CachedAttention(nn.Module):
             kv_cache = KVCache()
         cache_k, cache_v = kv_cache.update(new_k=K, new_v=V)
 
-        print(Q @ torch.transpose(cache_k, 1, 2))
         attention_score = nn.functional.softmax(Q @ torch.transpose(cache_k, 1, 2) / (self.model_dim**0.5), dim=-1)
-        attention = attention_score @ cache_v
+        attention_output = attention_score @ cache_v
 
-        return (torch.round(attention, decimals=4), kv_cache)
+        return (torch.round(attention_output, decimals=4), kv_cache)
